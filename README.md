@@ -8,8 +8,7 @@ When the loader is configured properly you can simply write the following in you
 ```
 <font-awesome-icon icon="coffee"></font-awesome-icon>
 ```
-/or/
-
+_or_
 ```
 <font-awesome-icon icon.bind="['fab', 'microsoft']"></font-awesome-icon>
 ```
