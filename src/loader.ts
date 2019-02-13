@@ -7,7 +7,6 @@ import { getOptions } from "loader-utils";
 import { loader } from "webpack";
 
 export default function loader(this: loader.LoaderContext, content: string) {
-    debugger;
     this.cacheable && this.cacheable();
     const options = getOptions(this) || {};
     const icons = findIcons(content);
