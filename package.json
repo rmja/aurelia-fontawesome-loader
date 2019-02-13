@@ -1,0 +1,46 @@
+{
+    "name": "aurelia-fontawesome-loader",
+    "version": "0.1.0",
+    "description": "A webpack loader for aurelia-fontawesome",
+    "main": "dist/loader.js",
+    "scripts": {
+        "build": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "tslint --project tsconfig.json",
+        "precommit": "npm run lint"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/rmja/aurelia-fontawesome-loader.git"
+    },
+    "keywords": [
+        "aurelia",
+        "fontawesome",
+        "font-awesome",
+        "webpack",
+        "loader"
+    ],
+    "author": "Rasmus Melchior Jacobsen <rmja@laesoe.org>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rmja/aurelia-fontawesome-loader/issues"
+    },
+    "homepage": "https://github.com/rmja/aurelia-fontawesome-loader#readme",
+    "devDependencies": {
+        "@fortawesome/fontawesome-common-types": "^0.2.15",
+        "@types/loader-utils": "^1.1.3",
+        "@types/webpack": "^4.4.24",
+        "aurelia-loader": "^1.0.1",
+        "tslint": "^5.12.1",
+        "typescript": "^3.3.3",
+        "webpack": "^4.29.3"
+    },
+    "peerDependencies": {
+        "webpack": "^4.29.3",
+        "aurelia-loader": "^1.0.1"
+    },
+    "dependencies": {
+        "html-loader": "^0.5.5",
+        "loader-utils": "^1.2.3"
+    }
+}
