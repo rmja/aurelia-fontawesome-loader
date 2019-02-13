@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "skipDefaultLibCheck": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "lib": [ "esnext", "dom" ]
+    },
+    "exclude": [ "node_modules", "dist" ]
+}

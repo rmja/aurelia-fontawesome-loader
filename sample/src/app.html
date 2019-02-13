@@ -1,0 +1,19 @@
+<template>
+    <!-- Method 1: Simply provide the icon name -->
+    <font-awesome-icon icon="coffee"></font-awesome-icon>
+
+    <!-- Method 2: Require the icon manually and use it with the fontawesome binding behavior -->
+    <require from="@fortawesome/free-solid-svg-icons/faHome"></require>
+    <font-awesome-icon icon.bind="'home' & fontawesome"></font-awesome-icon>
+
+    <!-- Method 1 with prefix -->
+    <font-awesome-icon icon.bind="['fab', 'microsoft']"></font-awesome-icon>
+
+    <!-- Method 2 with prefix -->
+    <require from="@fortawesome/free-brands-svg-icons/faGoogle"></require>
+    <font-awesome-icon icon.bind="['fab', 'google'] & fontawesome"></font-awesome-icon>
+
+    <!-- Method 2 with pro -->
+    <!-- <require from="@fortawesome/pro-brand-svg-icons/faHome"></require>
+    <font-awesome-icon icon.bind="'home' & fontawesome:true"></font-awesome-icon> -->
+</template>
