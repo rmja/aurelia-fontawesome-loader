@@ -11,6 +11,10 @@ export default function loader(this: loader.LoaderContext, content: string) {
     const options = getOptions(this) || {};
     const icons = findIcons(content);
 
+    if (icons.length === 0) {
+        return content;
+    }
+
     icons.reverse();
     const parts = [content];
 
@@ -33,9 +37,15 @@ export default function loader(this: loader.LoaderContext, content: string) {
         ...icons.map(x => getModuleId([x.prefix, x.iconName], options.pro)),
     ];
 
-    return parts.join("").replace(
-        /\<template([^>]*)\>/,
-        `<template$1>${modules.map(x => `<require from="${x}"></require>`).join("")}`);
+    content = parts.join("");
+
+    // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
+    // We therefore insert right before the first icon which should be fine
+    const indexOfFirstIcon = content.search(/<\s*font\-awesome\-icon[^>]*>/);
+
+    return content.substr(0, indexOfFirstIcon) +
+        modules.map(x => `<require from="${x}"></require>`).join("") +
+        content.substr(indexOfFirstIcon);
 }
 
 function findIcons(html: string) {

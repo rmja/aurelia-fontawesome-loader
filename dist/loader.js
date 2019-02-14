@@ -7,6 +7,9 @@ function loader(content) {
     this.cacheable && this.cacheable();
     const options = loader_utils_1.getOptions(this) || {};
     const icons = findIcons(content);
+    if (icons.length === 0) {
+        return content;
+    }
     icons.reverse();
     const parts = [content];
     for (const icon of icons) {
@@ -26,7 +29,13 @@ function loader(content) {
         "aurelia-fontawesome-loader/dist/binding-behavior",
         ...icons.map(x => utils_1.getModuleId([x.prefix, x.iconName], options.pro)),
     ];
-    return parts.join("").replace(/\<template([^>]*)\>/, `<template$1>${modules.map(x => `<require from="${x}"></require>`).join("")}`);
+    content = parts.join("");
+    // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
+    // We therefore insert right before the first icon which should be fine
+    const indexOfFirstIcon = content.search(/<\s*font\-awesome\-icon[^>]*>/);
+    return content.substr(0, indexOfFirstIcon) +
+        modules.map(x => `<require from="${x}"></require>`).join("") +
+        content.substr(indexOfFirstIcon);
 }
 exports.default = loader;
 function findIcons(html) {
