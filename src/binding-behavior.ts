@@ -20,7 +20,9 @@ export class FontawesomeBindingBehavior {
             binding.originalUpdateTarget(placeholderIconDefintion);
             const moduleId = getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
-            binding.originalUpdateTarget(icon.definition);
+            if (binding.originalUpdateTarget) {
+                binding.originalUpdateTarget(icon.definition);
+            }
         };
     }
 

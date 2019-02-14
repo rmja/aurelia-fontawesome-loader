@@ -18,7 +18,9 @@ class FontawesomeBindingBehavior {
             binding.originalUpdateTarget(placeholderIconDefintion);
             const moduleId = utils_1.getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
-            binding.originalUpdateTarget(icon.definition);
+            if (binding.originalUpdateTarget) {
+                binding.originalUpdateTarget(icon.definition);
+            }
         };
     }
     unbind(binding) {
