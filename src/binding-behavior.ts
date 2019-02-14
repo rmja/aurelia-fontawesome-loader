@@ -17,9 +17,22 @@ export class FontawesomeBindingBehavior {
     public bind(binding: any, scope: any, pro?: boolean) {
         binding.originalUpdateTarget = binding.updateTarget;
         binding.updateTarget = async (value: IconName | [IconPrefix, IconName]) => {
+            // Serialize value before handling equality check to handle the case when the value is an array
+            const serializedValue = JSON.stringify(value);
+
+            if (serializedValue === binding.currentSerializedValue) {
+                // Back out, the value has not changed
+                return;
+            }
+            binding.currentSerializedValue = serializedValue;
+
+            // Set a placeholder until the icon defintion has loaded
             binding.originalUpdateTarget(placeholderIconDefintion);
+
             const moduleId = getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
+
+            // Only set the value if the behavior is still bound
             if (binding.originalUpdateTarget) {
                 binding.originalUpdateTarget(icon.definition);
             }
@@ -29,5 +42,6 @@ export class FontawesomeBindingBehavior {
     public unbind(binding: any) {
         binding.updateTarget = binding.originalUpdateTarget;
         delete binding.originalUpdateTarget;
+        delete binding.currentSerializedValue;
     }
 }
