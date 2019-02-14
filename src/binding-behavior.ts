@@ -3,6 +3,12 @@ import { IconName, IconPrefix } from "@fortawesome/fontawesome-common-types";
 import { Loader } from "aurelia-loader";
 import { getModuleId } from "./utils";
 
+const placeholderIconDefintion = {
+    prefix: "none",
+    iconName: "placeholder",
+    icon: [0, 0, [], "", ""],
+};
+
 export class FontawesomeBindingBehavior {
     public static inject() { return [Loader]; }
     constructor(private loader: Loader) {
@@ -11,6 +17,7 @@ export class FontawesomeBindingBehavior {
     public bind(binding: any, scope: any, pro?: boolean) {
         binding.originalUpdateTarget = binding.updateTarget;
         binding.updateTarget = async (value: IconName | [IconPrefix, IconName]) => {
+            binding.originalUpdateTarget(placeholderIconDefintion);
             const moduleId = getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
             binding.originalUpdateTarget(icon.definition);
