@@ -7,9 +7,9 @@ class FontawesomeBindingBehavior {
         this.loader = loader;
     }
     static inject() { return [aurelia_loader_1.Loader]; }
-    bind(binding) {
+    bind(binding, scope, pro) {
         binding.originalUpdateTarget = binding.updateTarget;
-        binding.updateTarget = async (value, pro) => {
+        binding.updateTarget = async (value) => {
             const moduleId = utils_1.getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
             binding.originalUpdateTarget(icon.definition);
