@@ -6,7 +6,7 @@ import { getModuleId } from "./utils";
 const placeholderIconDefintion = {
     prefix: "none",
     iconName: "placeholder",
-    icon: [0, 0, [], "", ""],
+    icon: [1, 1, [], "", ""],
 };
 
 export class FontawesomeBindingBehavior {

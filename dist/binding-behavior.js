@@ -5,7 +5,7 @@ const utils_1 = require("./utils");
 const placeholderIconDefintion = {
     prefix: "none",
     iconName: "placeholder",
-    icon: [0, 0, [], "", ""],
+    icon: [1, 1, [], "", ""],
 };
 class FontawesomeBindingBehavior {
     constructor(loader) {
