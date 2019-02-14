@@ -30,7 +30,7 @@ function getModuleId(value, pro) {
 exports.getModuleId = getModuleId;
 function toPascalCase(input) {
     // https://stackoverflow.com/a/4068586/963753
-    return input.replace(/(\w)(\w*)/g, (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase());
+    return input.replace(/(\w)(\w*)/g, (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase()).replace(/[ -]/g, "");
 }
 exports.toPascalCase = toPascalCase;
 function notEmpty(value) {
