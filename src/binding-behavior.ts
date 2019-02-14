@@ -8,9 +8,9 @@ export class FontawesomeBindingBehavior {
     constructor(private loader: Loader) {
     }
 
-    public bind(binding: any) {
+    public bind(binding: any, scope: any, pro?: boolean) {
         binding.originalUpdateTarget = binding.updateTarget;
-        binding.updateTarget = async (value: IconName | [IconPrefix, IconName], pro?: boolean) => {
+        binding.updateTarget = async (value: IconName | [IconPrefix, IconName]) => {
             const moduleId = getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
             binding.originalUpdateTarget(icon.definition);
