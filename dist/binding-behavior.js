@@ -2,6 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const aurelia_loader_1 = require("aurelia-loader");
 const utils_1 = require("./utils");
+const placeholderIconDefintion = {
+    prefix: "none",
+    iconName: "placeholder",
+    icon: [0, 0, [], "", ""],
+};
 class FontawesomeBindingBehavior {
     constructor(loader) {
         this.loader = loader;
@@ -10,6 +15,7 @@ class FontawesomeBindingBehavior {
     bind(binding, scope, pro) {
         binding.originalUpdateTarget = binding.updateTarget;
         binding.updateTarget = async (value) => {
+            binding.originalUpdateTarget(placeholderIconDefintion);
             const moduleId = utils_1.getModuleId(value, !!pro);
             const icon = await this.loader.loadModule(moduleId);
             binding.originalUpdateTarget(icon.definition);
