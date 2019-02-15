@@ -1,54 +1,54 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const parse = require("html-loader/lib/attributesParser");
-const utils_1 = require("./utils");
-const loader_utils_1 = require("loader-utils");
+var parse = require("html-loader/lib/attributesParser");
+var utils_1 = require("./utils");
+var loader_utils_1 = require("loader-utils");
 function loader(content) {
     this.cacheable && this.cacheable();
-    const options = loader_utils_1.getOptions(this) || {};
-    const icons = findIcons(content);
+    var options = loader_utils_1.getOptions(this) || {};
+    var icons = findIcons(content);
     if (icons.length === 0) {
         return content;
     }
     icons.reverse();
-    const parts = [content];
-    for (const icon of icons) {
-        const x = parts.pop();
+    var parts = [content];
+    for (var _i = 0, icons_1 = icons; _i < icons_1.length; _i++) {
+        var icon = icons_1[_i];
+        var x = parts.pop();
         // https://github.com/webpack-contrib/html-loader/blob/master/index.js#L70-L73
         parts.push(x.substr(icon.token.start + icon.token.length + 1));
         if (icon.prefix !== "fas") {
-            parts.push(`icon.bind="['${icon.prefix}','${icon.iconName}'] & fontawesome${options.pro ? ":true" : ""}"`);
+            parts.push("icon.bind=\"['" + icon.prefix + "','" + icon.iconName + "'] & fontawesome" + (options.pro ? ":true" : "") + "\"");
         }
         else {
-            parts.push(`icon.bind="'${icon.iconName}' & fontawesome${options.pro ? ":true" : ""}"`);
+            parts.push("icon.bind=\"'" + icon.iconName + "' & fontawesome" + (options.pro ? ":true" : "") + "\"");
         }
         parts.push(x.substr(0, icon.attributeNameStart));
     }
     parts.reverse();
-    const modules = [
-        "aurelia-fontawesome-loader/dist/binding-behavior",
-        ...icons.map(x => utils_1.getModuleId([x.prefix, x.iconName], options.pro)),
-    ];
+    var modules = [
+        "aurelia-fontawesome-loader/dist/binding-behavior"
+    ].concat(icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro); }));
     content = parts.join("");
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine
-    const indexOfFirstIcon = content.search(/<\s*font\-awesome\-icon[^>]*>/);
+    var indexOfFirstIcon = content.search(/<\s*font\-awesome\-icon[^>]*>/);
     return content.substr(0, indexOfFirstIcon) +
-        modules.map(x => `<require from="${x}"></require>`).join("") +
+        modules.map(function (x) { return "<require from=\"" + x + "\"></require>"; }).join("") +
         content.substr(indexOfFirstIcon);
 }
 exports.default = loader;
 function findIcons(html) {
-    const attributes = ["icon", /*icon.*/ "bind", /*icon.*/ "one-time"];
-    return parse(html, (tag, attr) => tag === "font-awesome-icon" && attributes.includes(attr))
-        .map(token => {
-        const attributeNameStart = html.substr(0, token.start - 1).search(/icon(|\.bind|\.one\-time)\s*=\s*$/);
+    var attributes = ["icon", /*icon.*/ "bind", /*icon.*/ "one-time"];
+    return parse(html, function (tag, attr) { return tag === "font-awesome-icon" && attributes.includes(attr); })
+        .map(function (token) {
+        var attributeNameStart = html.substr(0, token.start - 1).search(/icon(|\.bind|\.one\-time)\s*=\s*$/);
         if (attributeNameStart >= 0) {
             if (html.substr(attributeNameStart).startsWith("icon.")) {
-                const match = /^\[\s*'([a-z]{3})'\s*,\s*'([a-z\-]+)'\s*\]$/.exec(token.value);
+                var match = /^\[\s*'([a-z]{3})'\s*,\s*'([a-z\-]+)'\s*\]$/.exec(token.value);
                 return match && {
-                    attributeNameStart,
-                    token,
+                    attributeNameStart: attributeNameStart,
+                    token: token,
                     prefix: match[1],
                     iconName: match[2],
                 };
@@ -56,8 +56,8 @@ function findIcons(html) {
             else {
                 if (/^[a-z\-]+$/.test(token.value)) {
                     return {
-                        attributeNameStart,
-                        token,
+                        attributeNameStart: attributeNameStart,
+                        token: token,
                         prefix: "fas",
                         iconName: token.value,
                     };

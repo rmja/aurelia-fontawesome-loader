@@ -1,22 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const aurelia_loader_1 = require("aurelia-loader");
-const utils_1 = require("./utils");
-const placeholderIconDefintion = {
+var aurelia_loader_1 = require("aurelia-loader");
+var utils_1 = require("./utils");
+var placeholderIconDefintion = {
     prefix: "none",
     iconName: "placeholder",
     icon: [1, 1, [], "", ""],
 };
-class FontawesomeBindingBehavior {
-    constructor(loader) {
+var FontawesomeBindingBehavior = /** @class */ (function () {
+    function FontawesomeBindingBehavior(loader) {
         this.loader = loader;
     }
-    static inject() { return [aurelia_loader_1.Loader]; }
-    bind(binding, scope, pro) {
+    FontawesomeBindingBehavior.inject = function () { return [aurelia_loader_1.Loader]; };
+    FontawesomeBindingBehavior.prototype.bind = function (binding, scope, pro) {
+        var _this = this;
         binding.originalUpdateTarget = binding.updateTarget;
-        binding.updateTarget = async (value) => {
+        binding.updateTarget = function (value) {
             // Serialize value before handling equality check to handle the case when the value is an array
-            const serializedValue = JSON.stringify(value);
+            var serializedValue = JSON.stringify(value);
             if (serializedValue === binding.currentSerializedValue) {
                 // Back out, the value has not changed
                 return;
@@ -24,19 +25,21 @@ class FontawesomeBindingBehavior {
             binding.currentSerializedValue = serializedValue;
             // Set a placeholder until the icon defintion has loaded
             binding.originalUpdateTarget(placeholderIconDefintion);
-            const moduleId = utils_1.getModuleId(value, !!pro);
-            const icon = await this.loader.loadModule(moduleId);
-            // Only set the value if the behavior is still bound
-            if (binding.originalUpdateTarget) {
-                binding.originalUpdateTarget(icon.definition);
-            }
+            var moduleId = utils_1.getModuleId(value, !!pro);
+            _this.loader.loadModule(moduleId).then(function (icon) {
+                // Only set the value if the behavior is still bound
+                if (binding.originalUpdateTarget) {
+                    binding.originalUpdateTarget(icon.definition);
+                }
+            });
         };
-    }
-    unbind(binding) {
+    };
+    FontawesomeBindingBehavior.prototype.unbind = function (binding) {
         binding.updateTarget = binding.originalUpdateTarget;
         delete binding.originalUpdateTarget;
         delete binding.currentSerializedValue;
-    }
-}
+    };
+    return FontawesomeBindingBehavior;
+}());
 exports.FontawesomeBindingBehavior = FontawesomeBindingBehavior;
 //# sourceMappingURL=binding-behavior.js.map
