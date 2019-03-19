@@ -62,3 +62,9 @@ plugins: [
 ]
 ```
 
+3) Tell your aurelia app to include the loader binding behavior that brings in icons as needed.
+Do this by inserting the following in your code during aurelia boot
+
+```
+aurelia.use.plugin(PLATFORM.moduleName('aurelia-fontawesome-loader'))
+```
