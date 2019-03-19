@@ -26,9 +26,7 @@ function loader(content) {
         parts.push(x.substr(0, icon.attributeNameStart));
     }
     parts.reverse();
-    var modules = [
-        "aurelia-fontawesome-loader/dist/binding-behavior"
-    ].concat(icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro); }));
+    var modules = icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro); }).slice();
     content = parts.join("");
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine

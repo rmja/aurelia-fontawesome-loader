@@ -33,7 +33,6 @@ export default function loader(this: loader.LoaderContext, content: string) {
     parts.reverse();
 
     const modules = [
-        "aurelia-fontawesome-loader/dist/binding-behavior",
         ...icons.map(x => getModuleId([x.prefix, x.iconName], options.pro)),
     ];
 
