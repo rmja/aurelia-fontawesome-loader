@@ -44,14 +44,14 @@ module: {
         // The order of the loaders are important
         "html-loader",
         "aurelia-webpack-plugin/html-requires-loader",
-        "aurelia-fontawesome-loader"
+        "aurelia-fontawesome-loader/loader"
       ]
     }
   ]
 }
 ```
 The loader resolves to the free icon set by default - you can use the loader with the `pro` option if you have that license.
-This is easiest done by setting the loader to `"aurelia-fontawesome-loader?pro"`.
+This is easiest done by setting the loader to `"aurelia-fontawesome-loader/loader?pro"`.
 
 2) Tell the aurelia-webpack-plugin that it should _not_ automatically insert the `html-requires-loader`:
 ```
