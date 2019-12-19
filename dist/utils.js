@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var freePackages = {
     fas: "free-solid-svg-icons",
+    far: "free-regular-svg-icons",
     fab: "free-brands-svg-icons",
 };
 var proPackages = {
@@ -9,6 +10,7 @@ var proPackages = {
     far: "pro-regular-svg-icons",
     fal: "pro-light-svg-icons",
     fab: "pro-brands-svg-icons",
+    fad: "pro-duotone-svg-icons",
 };
 function getModuleId(value, pro) {
     var prefix;

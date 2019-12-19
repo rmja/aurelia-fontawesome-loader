@@ -2,6 +2,7 @@ import { IconName, IconPrefix } from "@fortawesome/fontawesome-common-types";
 
 const freePackages: Partial<{ [prefix in IconPrefix]: string }> = {
     fas: "free-solid-svg-icons",
+    far: "free-regular-svg-icons",
     fab: "free-brands-svg-icons",
 };
 
@@ -10,6 +11,7 @@ const proPackages: { [prefix in IconPrefix]: string } = {
     far: "pro-regular-svg-icons",
     fal: "pro-light-svg-icons",
     fab: "pro-brands-svg-icons",
+    fad: "pro-duotone-svg-icons",
 };
 
 export function getModuleId(value: IconName | [IconPrefix, IconName], pro: boolean) {
