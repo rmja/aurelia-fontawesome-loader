@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// List of packages is available here: https://fontawesome.com/how-to-use/with-the-api/setup/importing-icons#packages
 var freePackages = {
     fas: "free-solid-svg-icons",
     far: "free-regular-svg-icons",
@@ -8,8 +9,8 @@ var freePackages = {
 var proPackages = {
     fas: "pro-solid-svg-icons",
     far: "pro-regular-svg-icons",
+    fab: "free-brands-svg-icons",
     fal: "pro-light-svg-icons",
-    fab: "pro-brands-svg-icons",
     fad: "pro-duotone-svg-icons",
 };
 function getModuleId(value, pro) {
