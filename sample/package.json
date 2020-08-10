@@ -4,22 +4,22 @@
     "start": "webpack-dev-server --mode development"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.15",
-    "@fortawesome/free-brands-svg-icons": "^5.7.2",
-    "@fortawesome/free-solid-svg-icons": "^5.7.2",
-    "aurelia-fontawesome": "^0.1.0"
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-brands-svg-icons": "^5.14.0",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
+    "aurelia-fontawesome": "^0.1.0",
+    "aurelia-fontawesome-loader": "^0.7.0"
   },
   "devDependencies": {
-    "@types/webpack": "^4.4.24",
-    "aurelia-bootstrapper": "^2.3.2",
-    "aurelia-fontawesome-loader": "^0.1.0",
+    "@types/webpack": "^4.41.21",
+    "aurelia-bootstrapper": "^2.3.3",
     "aurelia-webpack-plugin": "^3.0.0",
     "raw-loader": "^1.0.0",
-    "ts-loader": "^5.3.3",
-    "ts-node": "^8.0.2",
-    "typescript": "^3.3.3",
-    "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "ts-loader": "^5.4.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
