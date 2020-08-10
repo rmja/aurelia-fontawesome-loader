@@ -11,7 +11,7 @@ const config = (): Configuration => {
         module: {
             rules: [
                 { test: /\.ts$/, include: /src/, use: { loader: "ts-loader", options: { configFile: "tsconfig.app.json" } } },
-                { test: /\.html$/, use: ["html-loader", "aurelia-webpack-plugin/html-requires-loader", "aurelia-fontawesome-loader"] },
+                { test: /\.html$/, use: ["html-loader", "aurelia-webpack-plugin/html-requires-loader", "aurelia-fontawesome-loader/loader"] },
             ]
         },
         resolve: {

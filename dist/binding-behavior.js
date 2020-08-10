@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FontawesomeBindingBehavior = void 0;
 var aurelia_loader_1 = require("aurelia-loader");
 var utils_1 = require("./utils");
 var placeholderIconDefintion = {

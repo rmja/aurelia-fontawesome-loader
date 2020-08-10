@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.toPascalCase = exports.getModuleId = void 0;
 // List of packages is available here: https://fontawesome.com/how-to-use/with-the-api/setup/importing-icons#packages
 var freePackages = {
     fas: "free-solid-svg-icons",
@@ -36,8 +37,4 @@ function toPascalCase(input) {
     return input.replace(/(\w)(\w*)/g, function (g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); }).replace(/[ -]/g, "");
 }
 exports.toPascalCase = toPascalCase;
-function notEmpty(value) {
-    return !!value;
-}
-exports.notEmpty = notEmpty;
 //# sourceMappingURL=utils.js.map
