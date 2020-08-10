@@ -6,7 +6,7 @@
     "scripts": {
         "build": "tsc && copyfiles -f dist/loader.js dist/utils.js . && rimraf dist/loader.*",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "tslint --project tsconfig.json",
+        "lint": "eslint src --ext .ts",
         "precommit": "npm run lint"
     },
     "repository": {
@@ -33,9 +33,9 @@
         "aurelia-loader": "^1.0.2",
         "copyfiles": "^2.1.1",
         "rimraf": "^3.0.0",
-        "tslint": "^5.20.1",
         "typescript": "^3.7.3",
         "webpack": "^4.41.4"
+        "eslint": "^7.6.0",
     },
     "peerDependencies": {
         "webpack": "^4.29.3",
