@@ -35,7 +35,6 @@ function loader(content) {
     parts.reverse();
     var modules = __spreadArrays(icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro === true); }));
     content = parts.join("");
-    console.log(content);
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine
     var indexOfFirstIcon = content.search(/<\s*font-awesome-icon[^>]*>/);

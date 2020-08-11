@@ -38,8 +38,6 @@ export default function loader(this: loader.LoaderContext, content: string) {
 
     content = parts.join("");
 
-    console.log(content);
-
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine
     const indexOfFirstIcon = content.search(/<\s*font-awesome-icon[^>]*>/);
