@@ -1,10 +1,8 @@
 "use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var htmlparser2_1 = require("htmlparser2");
@@ -33,7 +31,7 @@ function loader(content) {
         parts.push(x.substr(0, icon.attributeNameStart));
     }
     parts.reverse();
-    var modules = __spreadArrays(icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro === true); }));
+    var modules = __spreadArray([], icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro === true); }));
     content = parts.join("");
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine
