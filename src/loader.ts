@@ -3,12 +3,15 @@ import { Tokenizer } from "htmlparser2";
 import { IconName, IconPrefix } from "@fortawesome/fontawesome-common-types";
 import { getModuleId } from "./utils";
 
-import { getOptions } from "loader-utils";
-import { loader } from "webpack";
+import { LoaderContext } from "webpack";
 
-export default function loader(this: loader.LoaderContext, content: string) {
+interface LoaderOptions {
+    pro?: boolean;
+}
+
+export default function loader(this: LoaderContext<LoaderOptions>, content: string) {
     this.cacheable && this.cacheable();
-    const options = getOptions(this) || {};
+    const options = this.getOptions() || {};
     const icons = findIcons(content);
 
     if (icons.length === 0) {

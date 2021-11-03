@@ -11,10 +11,9 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var htmlparser2_1 = require("htmlparser2");
 var utils_1 = require("./utils");
-var loader_utils_1 = require("loader-utils");
 function loader(content) {
     this.cacheable && this.cacheable();
-    var options = (0, loader_utils_1.getOptions)(this) || {};
+    var options = this.getOptions() || {};
     var icons = findIcons(content);
     if (icons.length === 0) {
         return content;
