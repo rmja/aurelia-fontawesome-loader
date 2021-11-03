@@ -10,9 +10,10 @@ const placeholderIconDefintion = {
 };
 
 export class FontawesomeBindingBehavior {
-    public static inject() { return [Loader]; }
-    constructor(private loader: Loader) {
+    public static inject() {
+        return [Loader];
     }
+    constructor(private loader: Loader) {}
 
     public bind(binding: any, scope: any, pro?: boolean) {
         binding.originalUpdateTarget = binding.updateTarget;
@@ -30,7 +31,7 @@ export class FontawesomeBindingBehavior {
             binding.originalUpdateTarget(placeholderIconDefintion);
 
             const moduleId = getModuleId(value, !!pro);
-            this.loader.loadModule(moduleId).then(icon => {
+            this.loader.loadModule(moduleId).then((icon) => {
                 // Only set the value if the behavior is still bound
                 if (binding.originalUpdateTarget) {
                     binding.originalUpdateTarget(icon.definition);
