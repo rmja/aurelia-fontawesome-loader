@@ -12,7 +12,9 @@ var FontawesomeBindingBehavior = /** @class */ (function () {
     function FontawesomeBindingBehavior(loader) {
         this.loader = loader;
     }
-    FontawesomeBindingBehavior.inject = function () { return [aurelia_loader_1.Loader]; };
+    FontawesomeBindingBehavior.inject = function () {
+        return [aurelia_loader_1.Loader];
+    };
     FontawesomeBindingBehavior.prototype.bind = function (binding, scope, pro) {
         var _this = this;
         binding.originalUpdateTarget = binding.updateTarget;

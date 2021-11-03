@@ -34,21 +34,25 @@ function loader(content) {
         parts.push(x.substr(0, icon.attributeNameStart));
     }
     parts.reverse();
-    var modules = __spreadArray([], icons.map(function (x) { return (0, utils_1.getModuleId)([x.prefix, x.iconName], options.pro === true); }), true);
+    var modules = __spreadArray([], icons.map(function (x) {
+        return (0, utils_1.getModuleId)([x.prefix, x.iconName], options.pro === true);
+    }), true);
     content = parts.join("");
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine
     var indexOfFirstIcon = content.search(/<\s*font-awesome-icon[^>]*>/);
-    return content.substr(0, indexOfFirstIcon) +
+    return (content.substr(0, indexOfFirstIcon) +
         modules.map(function (x) { return "<require from=\"" + x + "\"></require>"; }).join("") +
-        content.substr(indexOfFirstIcon);
+        content.substr(indexOfFirstIcon));
 }
 exports.default = loader;
 function findIcons(html) {
     var icons = [];
     var current = null;
     var currentAttributeName = "";
-    var isIconAttributeName = function (name) { return name === "icon" || name === "icon.bind" || name === "icon.one-time"; };
+    var isIconAttributeName = function (name) {
+        return name === "icon" || name === "icon.bind" || name === "icon.one-time";
+    };
     var tokenizer = new htmlparser2_1.Tokenizer({}, {
         onopentagname: function (name) {
             if (name === "font-awesome-icon") {
@@ -58,7 +62,8 @@ function findIcons(html) {
         onattribname: function (name) {
             if (current) {
                 if (isIconAttributeName(name)) {
-                    current.attributeNameStart = tokenizer.getAbsoluteIndex() - name.length;
+                    current.attributeNameStart =
+                        tokenizer.getAbsoluteIndex() - name.length;
                     current.attributeName = name;
                 }
             }
@@ -66,12 +71,16 @@ function findIcons(html) {
         },
         onattribdata: function (value) {
             if (current && isIconAttributeName(currentAttributeName)) {
-                current.attributeValueStart = tokenizer.getAbsoluteIndex() - value.length;
+                current.attributeValueStart =
+                    tokenizer.getAbsoluteIndex() - value.length;
                 current.attributeValue = value;
             }
         },
         onopentagend: function () {
-            if ((current === null || current === void 0 ? void 0 : current.attributeNameStart) && current.attributeName && (current === null || current === void 0 ? void 0 : current.attributeValueStart) && (current === null || current === void 0 ? void 0 : current.attributeValue)) {
+            if ((current === null || current === void 0 ? void 0 : current.attributeNameStart) &&
+                current.attributeName &&
+                (current === null || current === void 0 ? void 0 : current.attributeValueStart) &&
+                (current === null || current === void 0 ? void 0 : current.attributeValue)) {
                 if (current.attributeName === "icon") {
                     icons.push({
                         attributeNameStart: current.attributeNameStart,
@@ -79,7 +88,7 @@ function findIcons(html) {
                         attributeValueStart: current.attributeValueStart,
                         attributeValue: current.attributeValue,
                         prefix: "fas",
-                        iconName: current.attributeValue
+                        iconName: current.attributeValue,
                     });
                 }
                 else {
@@ -107,7 +116,7 @@ function findIcons(html) {
         onerror: function (error) { },
         onprocessinginstruction: function (instruction) { },
         onselfclosingtag: function () { },
-        ontext: function (value) { }
+        ontext: function (value) { },
     });
     tokenizer.write(html);
     tokenizer.end();

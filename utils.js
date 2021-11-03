@@ -17,7 +17,7 @@ var proPackages = {
 function getModuleId(value, pro) {
     var prefix;
     var iconName;
-    if (typeof (value) === "string") {
+    if (typeof value === "string") {
         prefix = "fas";
         iconName = value;
     }
@@ -34,7 +34,9 @@ function getModuleId(value, pro) {
 exports.getModuleId = getModuleId;
 function toPascalCase(input) {
     // https://stackoverflow.com/a/4068586/963753
-    return input.replace(/(\w)(\w*)/g, function (g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); }).replace(/[ -]/g, "");
+    return input
+        .replace(/(\w)(\w*)/g, function (g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); })
+        .replace(/[ -]/g, "");
 }
 exports.toPascalCase = toPascalCase;
 //# sourceMappingURL=utils.js.map
