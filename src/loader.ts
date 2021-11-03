@@ -6,7 +6,7 @@ import { getModuleId } from "./utils";
 import { LoaderContext } from "webpack";
 
 interface LoaderOptions {
-    pro?: boolean;
+    pro?: "";
 }
 
 export default function loader(
@@ -15,6 +15,7 @@ export default function loader(
 ) {
     this.cacheable && this.cacheable();
     const options = this.getOptions() || {};
+    const pro = options.pro !== undefined;
     const icons = findIcons(content);
 
     if (icons.length === 0) {
@@ -35,12 +36,12 @@ export default function loader(
             parts.push(
                 `icon.bind="['${icon.prefix}','${
                     icon.iconName
-                }'] & fontawesome${options.pro ? ":true" : ""}"`
+                }'] & fontawesome${pro ? ":true" : ""}"`
             );
         } else {
             parts.push(
                 `icon.bind="'${icon.iconName}' & fontawesome${
-                    options.pro ? ":true" : ""
+                    pro ? ":true" : ""
                 }"`
             );
         }
@@ -50,7 +51,7 @@ export default function loader(
 
     const modules = [
         ...icons.map((x) =>
-            getModuleId([x.prefix, x.iconName], options.pro === true)
+            getModuleId([x.prefix, x.iconName], pro)
         ),
     ];
 

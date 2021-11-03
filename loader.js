@@ -14,6 +14,7 @@ var utils_1 = require("./utils");
 function loader(content) {
     this.cacheable && this.cacheable();
     var options = this.getOptions() || {};
+    var pro = options.pro !== undefined;
     var icons = findIcons(content);
     if (icons.length === 0) {
         return content;
@@ -26,16 +27,16 @@ function loader(content) {
         // https://github.com/webpack-contrib/html-loader/blob/v0.5.5/index.js#L70-L73
         parts.push(x.substr(icon.attributeValueStart + icon.attributeValue.length + 1));
         if (icon.prefix !== "fas") {
-            parts.push("icon.bind=\"['" + icon.prefix + "','" + icon.iconName + "'] & fontawesome" + (options.pro ? ":true" : "") + "\"");
+            parts.push("icon.bind=\"['" + icon.prefix + "','" + icon.iconName + "'] & fontawesome" + (pro ? ":true" : "") + "\"");
         }
         else {
-            parts.push("icon.bind=\"'" + icon.iconName + "' & fontawesome" + (options.pro ? ":true" : "") + "\"");
+            parts.push("icon.bind=\"'" + icon.iconName + "' & fontawesome" + (pro ? ":true" : "") + "\"");
         }
         parts.push(x.substr(0, icon.attributeNameStart));
     }
     parts.reverse();
     var modules = __spreadArray([], icons.map(function (x) {
-        return (0, utils_1.getModuleId)([x.prefix, x.iconName], options.pro === true);
+        return (0, utils_1.getModuleId)([x.prefix, x.iconName], pro);
     }), true);
     content = parts.join("");
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
