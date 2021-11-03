@@ -1,8 +1,12 @@
 "use strict";
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var htmlparser2_1 = require("htmlparser2");
@@ -10,7 +14,7 @@ var utils_1 = require("./utils");
 var loader_utils_1 = require("loader-utils");
 function loader(content) {
     this.cacheable && this.cacheable();
-    var options = loader_utils_1.getOptions(this) || {};
+    var options = (0, loader_utils_1.getOptions)(this) || {};
     var icons = findIcons(content);
     if (icons.length === 0) {
         return content;
@@ -31,7 +35,7 @@ function loader(content) {
         parts.push(x.substr(0, icon.attributeNameStart));
     }
     parts.reverse();
-    var modules = __spreadArray([], icons.map(function (x) { return utils_1.getModuleId([x.prefix, x.iconName], options.pro === true); }));
+    var modules = __spreadArray([], icons.map(function (x) { return (0, utils_1.getModuleId)([x.prefix, x.iconName], options.pro === true); }), true);
     content = parts.join("");
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine

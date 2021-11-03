@@ -26,7 +26,7 @@ var FontawesomeBindingBehavior = /** @class */ (function () {
             binding.currentSerializedValue = serializedValue;
             // Set a placeholder until the icon defintion has loaded
             binding.originalUpdateTarget(placeholderIconDefintion);
-            var moduleId = utils_1.getModuleId(value, !!pro);
+            var moduleId = (0, utils_1.getModuleId)(value, !!pro);
             _this.loader.loadModule(moduleId).then(function (icon) {
                 // Only set the value if the behavior is still bound
                 if (binding.originalUpdateTarget) {

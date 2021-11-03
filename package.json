@@ -27,21 +27,21 @@
     },
     "homepage": "https://github.com/rmja/aurelia-fontawesome-loader#readme",
     "devDependencies": {
-        "@fortawesome/fontawesome-common-types": "^0.2.34",
+        "@fortawesome/fontawesome-common-types": "^0.2.36",
         "@types/loader-utils": "^2.0.0",
         "@types/webpack": "^4.41.26",
-        "@typescript-eslint/eslint-plugin": "^4.17.0",
-        "@typescript-eslint/parser": "^4.17.0",
+        "@typescript-eslint/eslint-plugin": "^5.3.0",
+        "@typescript-eslint/parser": "^5.3.0",
         "aurelia-loader": "^1.0.2",
         "copyfiles": "^2.4.1",
-        "eslint": "^7.22.0",
+        "eslint": "^8.1.0",
         "rimraf": "^3.0.2",
-        "typescript": "^4.2.3",
+        "typescript": "^4.4.4",
         "webpack": "^4.46.0"
     },
     "peerDependencies": {
         "webpack": "^4.29.3",
-        "aurelia-loader": "^1.0.1"
+        "aurelia-loader": "^1.0.2"
     },
     "dependencies": {
         "aurelia-pal": "^1.8.2",
