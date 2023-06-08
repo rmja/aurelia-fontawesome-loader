@@ -1,8 +1,6 @@
-import { Tokenizer } from "htmlparser2";
-
-import { getModuleId } from "./utils";
-
 import { LoaderContext } from "webpack";
+import { Tokenizer } from "htmlparser2";
+import { getModuleId } from "./utils";
 
 interface LoaderOptions {
     pro?: "";
@@ -29,7 +27,7 @@ export default function loader(
 
         // https://github.com/webpack-contrib/html-loader/blob/v0.5.5/index.js#L70-L73
         parts.push(
-            x.substr(icon.attributeValueStart + icon.attributeValue.length + 1)
+            x.substring(icon.attributeValueStart + icon.attributeValue.length + 1)
         );
         if (icon.prefix !== "fas") {
             parts.push(
@@ -44,7 +42,7 @@ export default function loader(
                 }"`
             );
         }
-        parts.push(x.substr(0, icon.attributeNameStart));
+        parts.push(x.substring(0, icon.attributeNameStart));
     }
     parts.reverse();
 
@@ -61,9 +59,9 @@ export default function loader(
     const indexOfFirstIcon = content.search(/<\s*font-awesome-icon[^>]*>/);
 
     return (
-        content.substr(0, indexOfFirstIcon) +
+        content.substring(0, indexOfFirstIcon) +
         modules.map((x) => `<require from="${x}"></require>`).join("") +
-        content.substr(indexOfFirstIcon)
+        content.substring(indexOfFirstIcon)
     );
 }
 
@@ -77,26 +75,26 @@ function findIcons(html: string) {
     const tokenizer = new Tokenizer(
         {},
         {
-            onopentagname: (name: string) => {
+            onopentagname: (start: number, endIndex: number) => {
+                const name = html.substring(start, endIndex);
                 if (name === "font-awesome-icon") {
                     current = {};
                 }
             },
-            onattribname: (name: string) => {
+            onattribname: (start: number, endIndex: number) => {
+                const name = html.substring(start, endIndex);
                 if (current) {
                     if (isIconAttributeName(name)) {
-                        current.attributeNameStart =
-                            tokenizer.getAbsoluteIndex() - name.length;
+                        current.attributeNameStart = start;
                         current.attributeName = name;
                     }
                 }
                 currentAttributeName = name;
             },
-            onattribdata: (value: string) => {
+            onattribdata: (start: number, endIndex: number) => {
                 if (current && isIconAttributeName(currentAttributeName)) {
-                    current.attributeValueStart =
-                        tokenizer.getAbsoluteIndex() - value.length;
-                    current.attributeValue = value;
+                    current.attributeValueStart = start;
+                    current.attributeValue = html.substring(start, endIndex);
                 }
             },
             onopentagend: () => {
@@ -136,16 +134,17 @@ function findIcons(html: string) {
                 current = null;
             },
 
-            onattribend: () => {},
-            oncdata: (data: string) => {},
-            onclosetag: (name: string) => {},
-            oncomment: (data: string) => {},
-            ondeclaration: (content: string) => {},
-            onend: () => {},
-            onerror: (error: Error) => {},
-            onprocessinginstruction: (instruction: string) => {},
-            onselfclosingtag: () => {},
-            ontext: (value: string) => {},
+            onattribentity: (_codepoint: number) => undefined,
+            onattribend: () => undefined,
+            oncdata: (_start: number, _endIndex: number, _endOffset: number) => undefined,
+            onclosetag: (_start: number, _endIndex: number) => undefined,
+            oncomment: (_start: number, _endIndex: number, _endOffset: number) => undefined,
+            ondeclaration: (_start: number, _endIndex: number) => undefined,
+            onend: () => undefined,
+            onprocessinginstruction: (_start: number, _endIndex: number) => undefined,
+            onselfclosingtag: () => undefined,
+            ontext: (_start: number, _endIndex: number) => undefined,
+            ontextentity: (_codepoint: number, _endIndex: number) => undefined
         }
     );
 

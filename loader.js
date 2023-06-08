@@ -25,14 +25,14 @@ function loader(content) {
         var icon = icons_1[_i];
         var x = parts.pop();
         // https://github.com/webpack-contrib/html-loader/blob/v0.5.5/index.js#L70-L73
-        parts.push(x.substr(icon.attributeValueStart + icon.attributeValue.length + 1));
+        parts.push(x.substring(icon.attributeValueStart + icon.attributeValue.length + 1));
         if (icon.prefix !== "fas") {
             parts.push("icon.bind=\"['".concat(icon.prefix, "','").concat(icon.iconName, "'] & fontawesome").concat(pro ? ":true" : "", "\""));
         }
         else {
             parts.push("icon.bind=\"'".concat(icon.iconName, "' & fontawesome").concat(pro ? ":true" : "", "\""));
         }
-        parts.push(x.substr(0, icon.attributeNameStart));
+        parts.push(x.substring(0, icon.attributeNameStart));
     }
     parts.reverse();
     var modules = __spreadArray([], icons.map(function (x) {
@@ -42,9 +42,9 @@ function loader(content) {
     // We cannot insert right after the template tag because it may violate templates that are used with "as-element"
     // We therefore insert right before the first icon which should be fine
     var indexOfFirstIcon = content.search(/<\s*font-awesome-icon[^>]*>/);
-    return (content.substr(0, indexOfFirstIcon) +
+    return (content.substring(0, indexOfFirstIcon) +
         modules.map(function (x) { return "<require from=\"".concat(x, "\"></require>"); }).join("") +
-        content.substr(indexOfFirstIcon));
+        content.substring(indexOfFirstIcon));
 }
 exports.default = loader;
 function findIcons(html) {
@@ -55,26 +55,26 @@ function findIcons(html) {
         return name === "icon" || name === "icon.bind" || name === "icon.one-time";
     };
     var tokenizer = new htmlparser2_1.Tokenizer({}, {
-        onopentagname: function (name) {
+        onopentagname: function (start, endIndex) {
+            var name = html.substring(start, endIndex);
             if (name === "font-awesome-icon") {
                 current = {};
             }
         },
-        onattribname: function (name) {
+        onattribname: function (start, endIndex) {
+            var name = html.substring(start, endIndex);
             if (current) {
                 if (isIconAttributeName(name)) {
-                    current.attributeNameStart =
-                        tokenizer.getAbsoluteIndex() - name.length;
+                    current.attributeNameStart = start;
                     current.attributeName = name;
                 }
             }
             currentAttributeName = name;
         },
-        onattribdata: function (value) {
+        onattribdata: function (start, endIndex) {
             if (current && isIconAttributeName(currentAttributeName)) {
-                current.attributeValueStart =
-                    tokenizer.getAbsoluteIndex() - value.length;
-                current.attributeValue = value;
+                current.attributeValueStart = start;
+                current.attributeValue = html.substring(start, endIndex);
             }
         },
         onopentagend: function () {
@@ -108,16 +108,17 @@ function findIcons(html) {
             }
             current = null;
         },
-        onattribend: function () { },
-        oncdata: function (data) { },
-        onclosetag: function (name) { },
-        oncomment: function (data) { },
-        ondeclaration: function (content) { },
-        onend: function () { },
-        onerror: function (error) { },
-        onprocessinginstruction: function (instruction) { },
-        onselfclosingtag: function () { },
-        ontext: function (value) { },
+        onattribentity: function (_codepoint) { return undefined; },
+        onattribend: function () { return undefined; },
+        oncdata: function (_start, _endIndex, _endOffset) { return undefined; },
+        onclosetag: function (_start, _endIndex) { return undefined; },
+        oncomment: function (_start, _endIndex, _endOffset) { return undefined; },
+        ondeclaration: function (_start, _endIndex) { return undefined; },
+        onend: function () { return undefined; },
+        onprocessinginstruction: function (_start, _endIndex) { return undefined; },
+        onselfclosingtag: function () { return undefined; },
+        ontext: function (_start, _endIndex) { return undefined; },
+        ontextentity: function (_codepoint, _endIndex) { return undefined; }
     });
     tokenizer.write(html);
     tokenizer.end();
