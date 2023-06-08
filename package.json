@@ -1,6 +1,6 @@
 {
     "name": "aurelia-fontawesome-loader",
-    "version": "1.0.0-beta.0",
+    "version": "1.0.0-beta.1",
     "description": "A webpack loader for aurelia-fontawesome",
     "main": "dist/index.js",
     "scripts": {
