@@ -1,5 +1,3 @@
-import { IconName, IconPrefix } from "@fortawesome/fontawesome-common-types";
-
 import { Loader } from "aurelia-loader";
 import { getModuleId } from "./utils";
 

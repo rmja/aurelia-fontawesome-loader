@@ -1,6 +1,5 @@
 import { Tokenizer } from "htmlparser2";
 
-import { IconName, IconPrefix } from "@fortawesome/fontawesome-common-types";
 import { getModuleId } from "./utils";
 
 import { LoaderContext } from "webpack";

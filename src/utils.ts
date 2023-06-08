@@ -1,13 +1,9 @@
-import { IconName, IconPrefix } from "@fortawesome/fontawesome-common-types";
-
 // List of packages is available here: https://fontawesome.com/how-to-use/with-the-api/setup/importing-icons#packages
-
 const freePackages: Partial<{ [prefix in IconPrefix]: string }> = {
     fas: "free-solid-svg-icons",
     far: "free-regular-svg-icons",
     fab: "free-brands-svg-icons",
 };
-
 const proPackages: { [prefix in IconPrefix]: string } = {
     fas: "pro-solid-svg-icons",
     far: "pro-regular-svg-icons",
