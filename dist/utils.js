@@ -27,9 +27,9 @@ function getModuleId(value, pro) {
     }
     var packageName = pro ? proPackages[prefix] : freePackages[prefix];
     if (!packageName) {
-        throw new Error("Unable to determine fontawesome package for prefix '" + prefix + "'");
+        throw new Error("Unable to determine fontawesome package for prefix '".concat(prefix, "'"));
     }
-    return "@fortawesome/" + packageName + "/fa" + toPascalCase(iconName);
+    return "@fortawesome/".concat(packageName, "/fa").concat(toPascalCase(iconName));
 }
 exports.getModuleId = getModuleId;
 function toPascalCase(input) {

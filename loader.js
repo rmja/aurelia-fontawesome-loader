@@ -27,10 +27,10 @@ function loader(content) {
         // https://github.com/webpack-contrib/html-loader/blob/v0.5.5/index.js#L70-L73
         parts.push(x.substr(icon.attributeValueStart + icon.attributeValue.length + 1));
         if (icon.prefix !== "fas") {
-            parts.push("icon.bind=\"['" + icon.prefix + "','" + icon.iconName + "'] & fontawesome" + (pro ? ":true" : "") + "\"");
+            parts.push("icon.bind=\"['".concat(icon.prefix, "','").concat(icon.iconName, "'] & fontawesome").concat(pro ? ":true" : "", "\""));
         }
         else {
-            parts.push("icon.bind=\"'" + icon.iconName + "' & fontawesome" + (pro ? ":true" : "") + "\"");
+            parts.push("icon.bind=\"'".concat(icon.iconName, "' & fontawesome").concat(pro ? ":true" : "", "\""));
         }
         parts.push(x.substr(0, icon.attributeNameStart));
     }
@@ -43,7 +43,7 @@ function loader(content) {
     // We therefore insert right before the first icon which should be fine
     var indexOfFirstIcon = content.search(/<\s*font-awesome-icon[^>]*>/);
     return (content.substr(0, indexOfFirstIcon) +
-        modules.map(function (x) { return "<require from=\"" + x + "\"></require>"; }).join("") +
+        modules.map(function (x) { return "<require from=\"".concat(x, "\"></require>"); }).join("") +
         content.substr(indexOfFirstIcon));
 }
 exports.default = loader;
